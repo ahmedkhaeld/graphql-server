@@ -2,27 +2,35 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+
+type Video {
+    id: ID!
+    title: String!
+    url: String!
+    author: User!
 }
 
 type User {
-  id: ID!
-  name: String!
+    id: ID!
+    name: String!
 }
 
+# query name: videos  includes a list of videos
 type Query {
-  todos: [Todo!]!
+    videos: [Video!]!
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+input NewVideo {
+    title: String!
+    url: String!
+    userId: String!
 }
 
+# createVideo in order to creat a new video, receive an input NewVideo type struct
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+    createVideo(input: NewVideo!): Video!
+}
+
+type Subscription {
+    videoAdded(repoFullName: String!): Video
 }
